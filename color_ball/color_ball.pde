@@ -1,19 +1,41 @@
 int h = 0;
+int x = 0;
+int y = 0;
+int dx = 5;
+int dy = 5;
 
 void setup() {
-  size(100, 100);
+  size(320, 240);
+  background(0, 0, 0);
 }
 
 void draw() {
+  fill(0, 0, 0, 10);
+  rect(0, 0, width, height);
   h++;
   if (h > 360) {
     h = 0;
   }
 
+  x = x + dx;
+  y = y + dy;
+  if (x > width) {
+    dx = dx * -1;
+  }
+  if (x < 0) {
+    dx = dx * -1;
+  }
+  if (y > height) {
+    dy = dy * -1;
+  }
+  if (y < 0) {
+    dy = dy * -1;
+  }
+
   int[] rgb = hue2rgb(h);
   fill(rgb[0], rgb[1], rgb[2]);
   noStroke();
-  ellipse(50, 50, 75, 75);
+  ellipse(x, y, 30, 30);
 }
 
 // hsv -> rgb

@@ -4,6 +4,9 @@ void setup() {
 }
 
 void draw() {
-  background(192, 64, 0);
   line(150, 25, mouseX, mouseY);
+}
+
+void mousePressed() {
+  background(192, 64, 0);
 }

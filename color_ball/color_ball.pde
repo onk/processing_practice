@@ -1,12 +1,14 @@
 int h = 0;
 int x = 0;
 int y = 0;
-int dx = 5;
-int dy = 5;
+int dx = 0;
+int dy = 0;
 
 void setup() {
   size(320, 240);
   background(0, 0, 0);
+  dx = (int) random(4) + 1;
+  dy = (int) random(4) + 1;
 }
 
 void draw() {

@@ -8,5 +8,6 @@ void draw() {
 }
 
 void mousePressed() {
+  saveFrame("output.png");
   background(192, 64, 0);
 }

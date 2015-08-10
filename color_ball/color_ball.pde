@@ -81,16 +81,10 @@ class Ball {
 
     x = x + dx;
     y = y + dy;
-    if (x > width) {
+    if (x < 0 || width < x) {
       dx = dx * -1;
     }
-    if (x < 0) {
-      dx = dx * -1;
-    }
-    if (y > height) {
-      dy = dy * -1;
-    }
-    if (y < 0) {
+    if (y < 0 || height < y) {
       dy = dy * -1;
     }
 

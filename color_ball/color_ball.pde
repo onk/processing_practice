@@ -1,14 +1,19 @@
-Ball ball;
+int BALL_NUM = 3;
+Ball[] balls = new Ball[BALL_NUM];
 void setup() {
   size(320, 240);
   background(0, 0, 0);
-  ball = new Ball();
+  for (int i = 0; i < balls.length; i++) {
+    balls[i] = new Ball();
+  }
 }
 
 void draw() {
   fill(0, 0, 0, 10);
   rect(0, 0, width, height);
-  ball.draw();
+  for (int i = 0; i < balls.length; i++) {
+    balls[i].draw();
+  }
 }
 
 // hsv -> rgb

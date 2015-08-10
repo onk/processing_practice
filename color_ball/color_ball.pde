@@ -66,6 +66,9 @@ class Ball {
   int dy = 0;
 
   Ball() {
+    x = (int) random(width);
+    y = (int) random(height);
+    h = (int) random(360);
     dx = (int) random(4) + 1;
     dy = (int) random(4) + 1;
   }

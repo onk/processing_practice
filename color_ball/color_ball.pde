@@ -1,4 +1,5 @@
 int BALL_NUM = 3;
+int BALL_SIZE = 15;
 Ball[] balls = new Ball[BALL_NUM];
 void setup() {
   size(320, 240);
@@ -11,9 +12,12 @@ void setup() {
 void draw() {
   fill(0, 0, 0, 10);
   rect(0, 0, width, height);
+
+  loadPixels();
   for (int i = 0; i < balls.length; i++) {
-    balls[i].draw();
+    balls[i].draw(pixels);
   }
+  updatePixels();
 }
 
 // hsv -> rgb
@@ -73,7 +77,7 @@ class Ball {
     dy = (int) random(4) + 1;
   }
 
-  void draw() {
+  void draw(int[] pixels) {
     h++;
     if (h > 360) {
       h = 0;
@@ -89,8 +93,15 @@ class Ball {
     }
 
     int[] rgb = hue2rgb(h);
-    fill(rgb[0], rgb[1], rgb[2]);
-    noStroke();
-    ellipse(x, y, 30, 30);
+    int c = color(rgb[0], rgb[1], rgb[2]);
+
+    for(int py = max(y - BALL_SIZE, 0); py < min(y + BALL_SIZE, height); py++){
+      for(int px = max(x - BALL_SIZE, 0); px < min(x + BALL_SIZE, width); px++){
+        if ((px-x)*(px-x) + (py-y)*(py-y) < BALL_SIZE*BALL_SIZE) {
+          int id = py * width + px;
+          pixels[id] = blendColor(pixels[id], c, ADD);
+        }
+      }
+    }
   }
 }

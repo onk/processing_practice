@@ -4,6 +4,9 @@ float dx = 1;
 float dy = 0;
 float g = 0.1;
 
+int mpX;
+int mpY;
+
 void setup() {
   size(320, 240);
   background(0, 0, 0);
@@ -24,4 +27,21 @@ void draw() {
   noStroke();
   fill(255, 255, 255);
   ellipse(x, y, 15, 15);
+}
+
+void mousePressed() {
+  mpX = mouseX;
+  mpY = mouseY;
+}
+
+void mouseReleased() {
+  int mrX = mouseX;
+  int mrY = mouseY;
+
+  // マウスを離した地点にボールを置く
+  x = (float) mrX;
+  y = (float) mrY;
+  // 初速、方向はマウスドラッグに依存
+  dx = (float)(mpX - mrX)/50.0f;
+  dy = (float)(mpY - mrY)/50.0f;
 }

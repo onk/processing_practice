@@ -44,6 +44,11 @@ void mouseReleased() {
   int mrX = mouseX;
   int mrY = mouseY;
 
+  // 画面外でマウスを離した場合は何もしない
+  if (mrX < 0 || width < mrX || mrY < 0 || width < mrY) {
+    return;
+  }
+
   // マウスを離した地点にボールを置く
   x = (float) mrX;
   y = (float) mrY;

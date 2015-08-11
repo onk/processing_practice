@@ -27,6 +27,12 @@ void draw() {
   noStroke();
   fill(255, 255, 255);
   ellipse(x, y, 15, 15);
+
+  if (mousePressed) {
+    stroke(255, 255, 0);
+    line(mpX, mpY, mouseX, mouseY);
+    noStroke();
+  }
 }
 
 void mousePressed() {

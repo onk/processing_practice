@@ -4,6 +4,9 @@ float dx = 1;
 float dy = 0;
 float g = 0.1;
 
+float ARROW_LENGTH_MAX = 20; // 先端の長さ
+int ARROW_ANGLE = 20; // 先端の角度
+
 int mpX;
 int mpY;
 
@@ -30,9 +33,24 @@ void draw() {
 
   if (mousePressed) {
     stroke(255, 255, 0);
-    line(mpX, mpY, mouseX, mouseY);
+    arrowline(mouseX, mouseY, mpX, mpY);
     noStroke();
   }
+}
+
+void arrowline(int x1, int y1, int x2, int y2) {
+  line(x1, y1, x2, y2);
+
+  float dx = x2 - x1;
+  float dy = y2 - y1;
+  float theta = atan2(dy, dx) - PI;
+
+  pushMatrix();
+  translate(x2, y2);
+  float arrow_length = min(sqrt(dx * dx + dy * dy), ARROW_LENGTH_MAX);
+  line(0, 0, arrow_length * cos(theta + radians(ARROW_ANGLE)), arrow_length * sin(theta + radians(ARROW_ANGLE)));
+  line(0, 0, arrow_length * cos(theta - radians(ARROW_ANGLE)), arrow_length * sin(theta - radians(ARROW_ANGLE)));
+  popMatrix();
 }
 
 void mousePressed() {

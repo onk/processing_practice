@@ -47,9 +47,10 @@ void arrowline(int x1, int y1, int x2, int y2) {
 
   pushMatrix();
   translate(x2, y2);
+  rotate(theta);
   float arrow_length = min(sqrt(dx * dx + dy * dy), ARROW_LENGTH_MAX);
-  line(0, 0, arrow_length * cos(theta + radians(ARROW_ANGLE)), arrow_length * sin(theta + radians(ARROW_ANGLE)));
-  line(0, 0, arrow_length * cos(theta - radians(ARROW_ANGLE)), arrow_length * sin(theta - radians(ARROW_ANGLE)));
+  line(0, 0, arrow_length * cos(radians(ARROW_ANGLE)), arrow_length * sin(radians(ARROW_ANGLE)));
+  line(0, 0, arrow_length * cos(-radians(ARROW_ANGLE)), arrow_length * sin(-radians(ARROW_ANGLE)));
   popMatrix();
 }
 

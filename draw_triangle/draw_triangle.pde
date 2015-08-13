@@ -8,20 +8,23 @@ void draw() {
 class Triangle {
   float gx;
   float gy;
-  float l;
+  float len;
   float angle;
 
-  Triangle(float gx, float gy, float l, float angle) {
+  Triangle(float gx, float gy, float len, float angle) {
     this.gx = gx;
     this.gy = gy;
-    this.l = l;
+    this.len = len;
     this.angle = angle;
   }
 
   void draw() {
-    line(gx, gy, gx + l*cos(radians(angle)), gy + l*sin(radians(angle)));
-    line(gx, gy, gx + l*cos(radians(angle+120)), gy + l*sin(radians(angle+120)));
-    line(gx, gy, gx + l*cos(radians(angle+240)), gy + l*sin(radians(angle+240)));
+    float[] t = { gx+len*cos(radians(angle)),     gy+len*sin(radians(angle)) };
+    float[] l = { gx+len*cos(radians(angle+120)), gy+len*sin(radians(angle+120)) };
+    float[] r = { gx+len*cos(radians(angle+240)), gy+len*sin(radians(angle+240)) };
+    line(t[0], t[1], l[0], l[1]);
+    line(l[0], l[1], r[0], r[1]);
+    line(r[0], r[1], t[0], t[1]);
   }
 }
 
@@ -29,8 +32,8 @@ void mousePressed() {
   background(#cccccc);
   float gx = random(width);
   float gy = random(height);
-  float l = random(160);
+  float len = random(160);
   float angle = random(360);
-  Triangle tri = new Triangle(gx, gy, l, angle);
+  Triangle tri = new Triangle(gx, gy, len, angle);
   tri.draw();
 }

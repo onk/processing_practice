@@ -25,6 +25,9 @@ class Triangle {
     line(t[0], t[1], l[0], l[1]);
     line(l[0], l[1], r[0], r[1]);
     line(r[0], r[1], t[0], t[1]);
+    noFill();
+    ellipse(gx, gy, len, len);
+    ellipse(gx, gy, len*2, len*2);
   }
 }
 

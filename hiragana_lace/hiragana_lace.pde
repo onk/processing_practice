@@ -4,6 +4,7 @@ PFont font;
 float theta;
 int gyou;
 int retsu;
+int fade;
 
 final String[][] chars = {
   { "あ", "い", "う", "え", "お" },
@@ -36,6 +37,14 @@ void setup() {
 
 
 void draw() {
+  if (fade > 0) {
+    fill(255, 255, 255, 32);
+    noStroke();
+    rect(0, 0, width, height);
+    fade--;
+    return;
+  }
+
   textSize(FONT_SIZE);
   fill(0);
 
@@ -53,7 +62,7 @@ void draw() {
       gyou++;
       if (gyou >= chars.length) {
         gyou = 0;
-        background(255);
+        fade = 50;
       }
     }
     theta = 0f;

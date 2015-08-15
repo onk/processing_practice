@@ -30,13 +30,21 @@ class Walker {
 
     float rx = random(1);
     if (rx < 0.5) {
-      stepX = 1;
+      if (mouseX - x > 0) {
+        stepX = 1;
+      } else {
+        stepX = -1;
+      }
     } else {
       stepX = int(random(3))-1;
     }
     float ry = random(1);
     if (ry < 0.5) {
-      stepY = 1;
+      if (mouseY - y > 0) {
+        stepY = 1;
+      } else {
+        stepY = -1;
+      }
     } else {
       stepY = int(random(3))-1;
     }

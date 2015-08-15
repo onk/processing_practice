@@ -25,8 +25,22 @@ class Walker {
   }
 
   void step() {
-    int stepX = int(random(3))-1;
-    int stepY = int(random(3))-1;
+    int stepX;
+    int stepY;
+
+    float rx = random(1);
+    if (rx < 0.5) {
+      stepX = 1;
+    } else {
+      stepX = int(random(3))-1;
+    }
+    float ry = random(1);
+    if (ry < 0.5) {
+      stepY = 1;
+    } else {
+      stepY = int(random(3))-1;
+    }
+
     x += stepX;
     y += stepY;
   }

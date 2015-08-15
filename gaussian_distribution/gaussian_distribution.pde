@@ -7,13 +7,17 @@ void setup() {
 }
 
 void draw() {
-  float num = (float) generator.nextGaussian();
-  float sd = 60;
-  float mean = 320;
+}
 
-  float x = sd * num + mean;
+void mousePressed() {
+  float sd = 60;
 
   noStroke();
-  fill(255, 10);
-  ellipse(x, 180, 16, 16);
+  fill(random(255), random(255), random(255));
+
+  for (int i = 0; i < 60; i++) {
+    float x = (float) generator.nextGaussian();
+    float y = (float) generator.nextGaussian();
+    ellipse(mouseX + sd*x, mouseY + sd*y, 8, 8);
+  }
 }

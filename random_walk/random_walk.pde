@@ -25,20 +25,9 @@ class Walker {
   }
 
   void step() {
-    int choice = int(random(4));
-    switch(choice) {
-      case 0:
-        x++;
-        break;
-      case 1:
-        x--;
-        break;
-      case 2:
-        y++;
-        break;
-      case 3:
-        y--;
-        break;
-    }
+    int stepX = int(random(3))-1;
+    int stepY = int(random(3))-1;
+    x += stepX;
+    y += stepY;
   }
 }

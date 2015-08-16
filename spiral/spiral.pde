@@ -1,7 +1,13 @@
+float rad;
 void setup() {
   size(320, 320);
+  rad = 0f;
 }
 
 void draw() {
-  ellipse(width/2, height/2, 300, 300);
+  int r = 150;
+  float x = r * sin(rad);
+  float y = r * cos(rad);
+  ellipse(x + width/2, y + height/2, 5, 5);
+  rad++;
 }

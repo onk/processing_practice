@@ -30,8 +30,8 @@ void draw() {
 }
 
 void displayColor() {
-  fill(colors[0], 48);
-  rect(0, 0, width, height);
+  fill(colors[0]);
+  rect(0, 0, width, (height/15)*(15-fade+1));
   fill(colors[1]);
   text(colorString, width/2, height/2);
 }

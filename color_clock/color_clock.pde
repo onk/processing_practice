@@ -2,9 +2,10 @@ int lastSecond;
 color[] colors;
 String colorString;
 int fade;
+int fadeType;
 
 void setup() {
-  size(640, 360);
+  size(600, 360);
   noStroke();
   textSize(64);
   textAlign(CENTER, CENTER);
@@ -12,6 +13,7 @@ void setup() {
   lastSecond = -1;
   colors = new color[2];
   fade = 0;
+  fadeType = 0;
 }
 
 void draw() {
@@ -25,13 +27,44 @@ void draw() {
   if (lastSecond != currentSecond) {
     setColors(currentSecond);
     fade = 15;
+    fadeType = currentSecond % 4;
     lastSecond = currentSecond;
   }
 }
 
 void displayColor() {
+  int sx = 0;
+  int sy = 0;
+  int dx = 0;
+  int dy = 0;
+  switch (fadeType) {
+    case 0: // 上から下に
+      sx = 0;
+      sy = 0;
+      dx = width;
+      dy = (height/15)*(15-fade+1);
+      break;
+    case 1: // 右から左に
+      sx = (width/15)*(fade-1);
+      sy = 0;
+      dx = width;
+      dy = height;
+      break;
+    case 2: // 下から上に
+      sx = 0;
+      sy = (height/15)*(fade-1);
+      dx = width;
+      dy = height;
+      break;
+    case 3: // 左から右に
+      sx = 0;
+      sy = 0;
+      dx = (width/15)*(15-fade+1);
+      dy = height;
+      break;
+  }
   fill(colors[0]);
-  rect(0, 0, width, (height/15)*(15-fade+1));
+  rect(sx, sy, dx, dy);
   fill(colors[1]);
   text(colorString, width/2, height/2);
 }

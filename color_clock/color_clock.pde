@@ -1,6 +1,7 @@
 int lastSecond;
 color[] colors;
 String colorString;
+int fade;
 
 void setup() {
   size(640, 360);
@@ -10,18 +11,29 @@ void setup() {
 
   lastSecond = -1;
   colors = new color[2];
+  fade = 0;
 }
 
 void draw() {
   int currentSecond = second();
 
+  if (fade > 0) {
+    displayColor();
+    fade--;
+  }
+
   if (lastSecond != currentSecond) {
     setColors(currentSecond);
-    background(colors[0]);
-    fill(colors[1]);
-    text(colorString, width/2, height/2);
+    fade = 15;
     lastSecond = currentSecond;
   }
+}
+
+void displayColor() {
+  fill(colors[0], 48);
+  rect(0, 0, width, height);
+  fill(colors[1]);
+  text(colorString, width/2, height/2);
 }
 
 void setColors(int currentSecond) {

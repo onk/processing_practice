@@ -8,6 +8,7 @@ int FRAME_RATE = 60;
 void setup() {
   size(600, 360);
   noStroke();
+  textFont(createFont("Tahoma-Bold", 64));
   textSize(64);
   textAlign(CENTER, CENTER);
   frameRate(FRAME_RATE);

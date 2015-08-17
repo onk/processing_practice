@@ -1,4 +1,5 @@
 int lastSecond;
+color[] colors;
 
 void setup() {
   size(640, 360);
@@ -7,13 +8,14 @@ void setup() {
   textAlign(CENTER, CENTER);
 
   lastSecond = -1;
+  colors = new color[2];
 }
 
 void draw() {
   int currentSecond = second();
 
   if (lastSecond != currentSecond) {
-    color[] colors = getColors(currentSecond);
+    setColors(currentSecond);
     background(colors[0]);
     fill(colors[1]);
     String colorString = "#" + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
@@ -22,10 +24,9 @@ void draw() {
   }
 }
 
-color[] getColors(int currentSecond) {
+void setColors(int currentSecond) {
   color timeColor = color(unhex(nf(hour(), 2)), unhex(nf(minute(), 2)), unhex(nf(second(), 2)));
   color bgColor   = color(255);
-  color[] colors = new color[2];
   if (currentSecond % 2 == 0) {
     colors[0] = timeColor;
     colors[1] = bgColor;
@@ -33,5 +34,4 @@ color[] getColors(int currentSecond) {
     colors[0] = bgColor;
     colors[1] = timeColor;
   }
-  return colors;
 }

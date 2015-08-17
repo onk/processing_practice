@@ -28,6 +28,9 @@ void draw() {
     setColors(currentSecond);
     fade = 15;
     fadeType = currentSecond % 4;
+    background(colors[1]);
+    fill(colors[0]);
+    text(colorString, width/2, height/2);
     lastSecond = currentSecond;
   }
 }
@@ -40,33 +43,42 @@ void displayColor() {
   switch (fadeType) {
     case 0: // 上から下に
       sx = 0;
-      sy = 0;
+      sy = (height/15)*(15-fade);
       dx = width;
       dy = (height/15)*(15-fade+1);
       break;
     case 1: // 右から左に
       sx = (width/15)*(fade-1);
       sy = 0;
-      dx = width;
+      dx = (width/15)*(fade);
       dy = height;
       break;
     case 2: // 下から上に
       sx = 0;
       sy = (height/15)*(fade-1);
       dx = width;
-      dy = height;
+      dy = (height/15)*(fade);
       break;
     case 3: // 左から右に
-      sx = 0;
+      sx = (width/15)*(15-fade);
       sy = 0;
       dx = (width/15)*(15-fade+1);
       dy = height;
       break;
   }
-  fill(colors[0]);
-  rect(sx, sy, dx, dy);
-  fill(colors[1]);
-  text(colorString, width/2, height/2);
+
+  loadPixels();
+  for (int y = sy; y < dy; y++) {
+    for (int x = sx; x < dx; x++) {
+      int id = y * width + x;
+      if (pixels[id] == colors[0]) {
+        pixels[id] = colors[1];
+      } else {
+        pixels[id] = colors[0];
+      }
+    }
+  }
+  updatePixels();
 }
 
 void setColors(int currentSecond) {

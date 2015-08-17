@@ -14,8 +14,8 @@ void draw() {
   rect(0, 0, width, height);
 
   loadPixels();
-  for (int i = 0; i < balls.length; i++) {
-    balls[i].draw(pixels);
+  for (Ball ball : balls) {
+    ball.draw(pixels);
   }
   updatePixels();
 }

@@ -26,9 +26,6 @@ void draw() {
     setColors(currentSecond);
     fade = (int) FRAME_RATE/4;
     fadeType = currentSecond % 4;
-    background(colors[1]);
-    fill(colors[0]);
-    text(colorString, width/2, height/2);
     lastSecond = currentSecond;
   }
 
@@ -38,48 +35,95 @@ void draw() {
   }
 }
 
+// 1. 白地に青文字で描画
+// 2. (cx1, cy1), (cx2, cy2) の矩形のピクセルを保存
+// 3. (nx1, ny1), (nx2, ny2) の矩形を青地に
+// 4. 白文字で描画
+// 5. 2 を描き戻す
 void displayColor() {
-  int sx = 0;
-  int sy = 0;
-  int dx = 0;
-  int dy = 0;
+  // 1. 白地に青文字で描画
+  background(colors[1]);
+  fill(colors[0]);
+  text(colorString, width/2, height/2);
+
+  // 保存する領域
+  int cx1 = 0;
+  int cy1 = 0;
+  int cx2 = 0;
+  int cy2 = 0;
+  // 新しい色で描画する領域
+  int nx1 = 0;
+  int ny1 = 0;
+  int nx2 = 0;
+  int ny2 = 0;
   int fr = (int) FRAME_RATE/4;
   switch (fadeType) {
     case 0: // 上から下に
-      sx = 0;
-      sy = (height/fr)*(fr-fade);
-      dx = width;
-      dy = (height/fr)*(fr-fade+1);
+      cx1 = 0;
+      cy1 = (height/fr)*(fr-fade+1);
+      cx2 = width;
+      cy2 = height;
+      nx1 = 0;
+      ny1 = 0;
+      nx2 = width;
+      ny2 = (height/fr)*(fr-fade+1);
       break;
     case 1: // 右から左に
-      sx = (width/fr)*(fade-1);
-      sy = 0;
-      dx = (width/fr)*(fade);
-      dy = height;
+      cx1 = 0;
+      cy1 = 0;
+      cx2 = (width/fr)*(fade-1);
+      cy2 = height;
+      nx1 = (width/fr)*(fade-1);
+      ny1 = 0;
+      nx2 = width;
+      ny2 = height;
       break;
     case 2: // 下から上に
-      sx = 0;
-      sy = (height/fr)*(fade-1);
-      dx = width;
-      dy = (height/fr)*(fade);
+      cx1 = 0;
+      cy1 = 0;
+      cx2 = width;
+      cy2 = (height/fr)*(fade-1);
+      nx1 = 0;
+      ny1 = (height/fr)*(fade-1);
+      nx2 = width;
+      ny2 = height;
       break;
     case 3: // 左から右に
-      sx = (width/fr)*(fr-fade);
-      sy = 0;
-      dx = (width/fr)*(fr-fade+1);
-      dy = height;
+      cx1 = (width/fr)*(fr-fade+1);
+      cy1 = 0;
+      cx2 = width;
+      cy2 = height;
+      nx1 = 0;
+      ny1 = 0;
+      nx2 = (width/fr)*(fr-fade+1);
+      ny2 = height;
       break;
   }
 
+  // 2. (cx1, cy1), (cx2, cy2) の矩形のピクセルを保存
+  color[] _pixels = new color[width*height];
   loadPixels();
-  for (int y = sy; y < dy; y++) {
-    for (int x = sx; x < dx; x++) {
+  arraycopy(pixels, _pixels);
+
+  // 3. (nx1, ny1), (nx2, ny2) の矩形を青地に
+  for (int y = ny1; y < ny2; y++) {
+    for (int x = nx1; x < nx2; x++) {
       int id = y * width + x;
-      if (pixels[id] == colors[0]) {
-        pixels[id] = colors[1];
-      } else {
-        pixels[id] = colors[0];
-      }
+      pixels[id] = colors[0];
+    }
+  }
+  updatePixels();
+
+  // 4. 白文字で描画
+  fill(colors[1]);
+  text(colorString, width/2, height/2);
+
+  // 5. 2 を描き戻す
+  loadPixels();
+  for (int y = cy1; y < cy2; y++) {
+    for (int x = cx1; x < cx2; x++) {
+      int id = y * width + x;
+      pixels[id] = _pixels[id];
     }
   }
   updatePixels();

@@ -22,11 +22,6 @@ void setup() {
 void draw() {
   int currentSecond = second();
 
-  if (fade > 0) {
-    displayColor();
-    fade--;
-  }
-
   if (lastSecond != currentSecond) {
     setColors(currentSecond);
     fade = (int) FRAME_RATE/4;
@@ -35,6 +30,11 @@ void draw() {
     fill(colors[0]);
     text(colorString, width/2, height/2);
     lastSecond = currentSecond;
+  }
+
+  if (fade > 0) {
+    displayColor();
+    fade--;
   }
 }
 

@@ -1,9 +1,12 @@
+import de.looksgood.ani.*;
+
 int lastSecond;
 color[] colors;
 String colorString;
-int fade;
 int fadeType;
 int FRAME_RATE = 60;
+float mx;
+float my;
 
 void setup() {
   size(600, 360);
@@ -12,10 +15,10 @@ void setup() {
   textSize(64);
   textAlign(CENTER, CENTER);
   frameRate(FRAME_RATE);
+  Ani.init(this);
 
   lastSecond = -1;
   colors = new color[2];
-  fade = 0;
   fadeType = 0;
 }
 
@@ -24,15 +27,16 @@ void draw() {
 
   if (lastSecond != currentSecond) {
     setColors(currentSecond);
-    fade = (int) FRAME_RATE/4;
     fadeType = currentSecond % 4;
     lastSecond = currentSecond;
+
+    mx = 0;
+    my = 0;
+    Ani aniX = new Ani(this, 0.5, "mx", width);
+    Ani aniY = new Ani(this, 0.5, "my", height);
   }
 
-  if (fade > 0) {
-    displayColor();
-    fade--;
-  }
+  displayColor();
 }
 
 // 1. 白地に青文字で描画
@@ -60,20 +64,20 @@ void displayColor() {
   switch (fadeType) {
     case 0: // 上から下に
       cx1 = 0;
-      cy1 = (height/fr)*(fr-fade+1);
+      cy1 = (int) my;
       cx2 = width;
       cy2 = height;
       nx1 = 0;
       ny1 = 0;
       nx2 = width;
-      ny2 = (height/fr)*(fr-fade+1);
+      ny2 = (int) my;
       break;
     case 1: // 右から左に
       cx1 = 0;
       cy1 = 0;
-      cx2 = (width/fr)*(fade-1);
+      cx2 = width - (int) mx;
       cy2 = height;
-      nx1 = (width/fr)*(fade-1);
+      nx1 = width - (int) mx;
       ny1 = 0;
       nx2 = width;
       ny2 = height;
@@ -82,20 +86,20 @@ void displayColor() {
       cx1 = 0;
       cy1 = 0;
       cx2 = width;
-      cy2 = (height/fr)*(fade-1);
+      cy2 = height - (int) my;
       nx1 = 0;
-      ny1 = (height/fr)*(fade-1);
+      ny1 = height - (int) my;
       nx2 = width;
       ny2 = height;
       break;
     case 3: // 左から右に
-      cx1 = (width/fr)*(fr-fade+1);
+      cx1 = (int) mx;
       cy1 = 0;
       cx2 = width;
       cy2 = height;
       nx1 = 0;
       ny1 = 0;
-      nx2 = (width/fr)*(fr-fade+1);
+      nx2 = (int) mx;
       ny2 = height;
       break;
   }

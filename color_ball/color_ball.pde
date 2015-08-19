@@ -102,11 +102,15 @@ class Ball {
 
     p.x = p.x + v.x;
     p.y = p.y + v.y;
-    if (p.x < 0 || width < p.x) {
+    if (p.x < BALL_SIZE || (width - BALL_SIZE) < p.x) {
       v.x = v.x * -1;
+      if (p.x < BALL_SIZE) { p.x = BALL_SIZE; }
+      if ((width - BALL_SIZE) < p.x) { p.x = width - BALL_SIZE; }
     }
-    if (p.y < 0 || height < p.y) {
+    if (p.y < BALL_SIZE || (height - BALL_SIZE) < p.y) {
       v.y = v.y * -1;
+      if (p.y < BALL_SIZE) { p.y = BALL_SIZE; }
+      if ((height - BALL_SIZE) < p.y) { p.y = height - BALL_SIZE; }
     }
 
     // 衝突判定

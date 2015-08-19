@@ -5,7 +5,7 @@ void setup() {
   size(320, 240);
   background(0, 0, 0);
   for (int i = 0; i < balls.length; i++) {
-    balls[i] = new Ball();
+    balls[i] = new Ball(i);
   }
 }
 
@@ -64,13 +64,15 @@ int[] hue2rgb(int h) {
 }
 
 class Ball {
+  int id;
   int h = 0;
   int x = 0;
   int y = 0;
   int dx = 0;
   int dy = 0;
 
-  Ball() {
+  Ball(int id) {
+    this.id = id;
     x = (int) random(width);
     y = (int) random(height);
     h = (int) random(360);

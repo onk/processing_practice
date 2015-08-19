@@ -66,27 +66,27 @@ int[] hue2rgb(int h) {
 class Ball {
   int id;
   int h = 0;
-  int x = 0;
-  int y = 0;
-  int dx = 0;
-  int dy = 0;
+  PVector p;
+  PVector v;
 
   Ball(int id) {
     this.id = id;
-    x = (int) random(width);
-    y = (int) random(height);
+    float px = random(width);
+    float py = random(height);
+    p = new PVector(px, py);
     h = (int) random(360);
-    dx = (int) random(4) + 1;
-    dy = (int) random(4) + 1;
+    float vx = random(4) + 1;
+    float vy = random(4) + 1;
+    v = new PVector(vx, vy);
   }
 
   void draw(int[] pixels) {
     int[] rgb = hue2rgb(h);
     int c = color(rgb[0], rgb[1], rgb[2]);
 
-    for(int py = max(y - BALL_SIZE, 0); py < min(y + BALL_SIZE, height); py++){
-      for(int px = max(x - BALL_SIZE, 0); px < min(x + BALL_SIZE, width); px++){
-        if ((px-x)*(px-x) + (py-y)*(py-y) < BALL_SIZE*BALL_SIZE) {
+    for(int py = (int)max(p.y - BALL_SIZE, 0); py < min(p.y + BALL_SIZE, height); py++){
+      for(int px = (int)max(p.x - BALL_SIZE, 0); px < min(p.x + BALL_SIZE, width); px++){
+        if ((px-p.x)*(px-p.x) + (py-p.y)*(py-p.y) < BALL_SIZE*BALL_SIZE) {
           int id = py * width + px;
           pixels[id] = blendColor(pixels[id], c, ADD);
         }
@@ -100,13 +100,13 @@ class Ball {
       h = 0;
     }
 
-    x = x + dx;
-    y = y + dy;
-    if (x < 0 || width < x) {
-      dx = dx * -1;
+    p.x = p.x + v.x;
+    p.y = p.y + v.y;
+    if (p.x < 0 || width < p.x) {
+      v.x = v.x * -1;
     }
-    if (y < 0 || height < y) {
-      dy = dy * -1;
+    if (p.y < 0 || height < p.y) {
+      v.y = v.y * -1;
     }
 
     // 衝突判定
@@ -120,15 +120,15 @@ class Ball {
         h = (int) random(255);
 
         // 反発後の移動方向を設定
-        dx = dx * -1;
-        dy = dy * -1;
+        v.x = v.x * -1;
+        v.y = v.y * -1;
       }
     }
   }
 
   boolean isCollidion(Ball other) {
-    int dx = this.x - other.x;
-    int dy = this.y - other.y;
+    float dx = this.p.x - other.p.x;
+    float dy = this.p.y - other.p.y;
     return BALL_SIZE + BALL_SIZE > sqrt(dx*dx + dy*dy);
   }
 }

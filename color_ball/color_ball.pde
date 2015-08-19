@@ -15,6 +15,7 @@ void draw() {
 
   loadPixels();
   for (Ball ball : balls) {
+    ball.move();
     ball.draw(pixels);
   }
   updatePixels();
@@ -78,6 +79,20 @@ class Ball {
   }
 
   void draw(int[] pixels) {
+    int[] rgb = hue2rgb(h);
+    int c = color(rgb[0], rgb[1], rgb[2]);
+
+    for(int py = max(y - BALL_SIZE, 0); py < min(y + BALL_SIZE, height); py++){
+      for(int px = max(x - BALL_SIZE, 0); px < min(x + BALL_SIZE, width); px++){
+        if ((px-x)*(px-x) + (py-y)*(py-y) < BALL_SIZE*BALL_SIZE) {
+          int id = py * width + px;
+          pixels[id] = blendColor(pixels[id], c, ADD);
+        }
+      }
+    }
+  }
+
+  void move() {
     h++;
     if (h > 360) {
       h = 0;
@@ -90,18 +105,6 @@ class Ball {
     }
     if (y < 0 || height < y) {
       dy = dy * -1;
-    }
-
-    int[] rgb = hue2rgb(h);
-    int c = color(rgb[0], rgb[1], rgb[2]);
-
-    for(int py = max(y - BALL_SIZE, 0); py < min(y + BALL_SIZE, height); py++){
-      for(int px = max(x - BALL_SIZE, 0); px < min(x + BALL_SIZE, width); px++){
-        if ((px-x)*(px-x) + (py-y)*(py-y) < BALL_SIZE*BALL_SIZE) {
-          int id = py * width + px;
-          pixels[id] = blendColor(pixels[id], c, ADD);
-        }
-      }
     }
   }
 }

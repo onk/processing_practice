@@ -108,5 +108,27 @@ class Ball {
     if (y < 0 || height < y) {
       dy = dy * -1;
     }
+
+    // 衝突判定
+    for (Ball ball : balls) {
+      if (ball.id == id) {
+        continue;
+      }
+
+      if (isCollidion(ball)) {
+        // 衝突したら色を変える
+        h = (int) random(255);
+
+        // 反発後の移動方向を設定
+        dx = dx * -1;
+        dy = dy * -1;
+      }
+    }
+  }
+
+  boolean isCollidion(Ball other) {
+    int dx = this.x - other.x;
+    int dy = this.y - other.y;
+    return BALL_SIZE + BALL_SIZE > sqrt(dx*dx + dy*dy);
   }
 }

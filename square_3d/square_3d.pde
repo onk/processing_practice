@@ -1,4 +1,6 @@
-float rot = 0f;
+float rotX = 0f;
+float rotY = 0f;
+float rotZ = 0f;
 void setup() {
   size(360, 360, P3D);
   fill(63, 127, 255);
@@ -8,7 +10,11 @@ void setup() {
 void draw() {
   background(0);
   translate(width/2, height/2);
-  rotateX(rot);
+  rotateX(rotX);
+  rotateY(rotY);
+  rotateZ(rotZ);
   rect(-100, -100, 200, 200);
-  rot += 0.06;
+  rotX += 0.02;
+  rotY += 0.03;
+  rotZ += 0.05;
 }

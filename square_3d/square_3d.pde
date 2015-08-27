@@ -12,6 +12,7 @@ void setup() {
   cam = new PeasyCam(this, width);
   cam.setMinimumDistance(width / 2);
   cam.setMaximumDistance(width * 2);
+  cam.setActive(false);
   Ani.init(this);
   fill(63, 127, 255);
   stroke(255);

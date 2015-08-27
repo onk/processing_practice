@@ -1,6 +1,3 @@
-float rotX = 0f;
-float rotY = 0f;
-float rotZ = 0f;
 void setup() {
   size(360, 360, P3D);
   fill(63, 127, 255);
@@ -9,12 +6,15 @@ void setup() {
 
 void draw() {
   background(0);
-  translate(width/2, height/2);
-  rotateX(rotX);
-  rotateY(rotY);
-  rotateZ(rotZ);
-  box(100, 100, 100);
-  rotX += 0.02;
-  rotY += 0.03;
-  rotZ += 0.05;
+  int dis = 20;
+  for(int x = 0; x < 6; x++) {
+    for(int y = 0; y < 6; y++) {
+      for(int z = 0; z < 6; z++) {
+        pushMatrix();
+        translate(x*(100+dis), y*(100+dis), z*(100+dis));
+        box(100);
+        popMatrix();
+      }
+    }
+  }
 }

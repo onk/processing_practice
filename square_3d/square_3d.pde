@@ -1,4 +1,5 @@
 import peasy.*;
+import de.looksgood.ani.*;
 PeasyCam cam;
 SeparateBox[] sboxes;
 
@@ -11,6 +12,7 @@ void setup() {
   cam = new PeasyCam(this, width);
   cam.setMinimumDistance(width / 2);
   cam.setMaximumDistance(width * 2);
+  Ani.init(this);
   fill(63, 127, 255);
   stroke(255);
   sboxes = new SeparateBox[6*6*6];
@@ -28,7 +30,6 @@ void draw() {
   pushMatrix();
   translate(-300, -300, -300);
   for(SeparateBox sbox : sboxes) {
-    sbox.update();
     sbox.render(cam.getRotations());
   }
   popMatrix();
@@ -59,9 +60,20 @@ class SeparateBox {
     popMatrix();
   }
 
-  void update() {
+  void rotate() {
     if (move) {
-      r += 5;
+      r = 0;
+      Ani ani = new Ani(this, 3.0, "r", 720);
     }
+  }
+}
+
+void keyPressed() {
+  switch(key) {
+    case ' ':
+      for(SeparateBox sbox : sboxes) {
+        sbox.rotate();
+      }
+      break;
   }
 }

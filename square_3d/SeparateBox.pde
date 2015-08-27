@@ -17,9 +17,9 @@ class SeparateBox {
     int dis = 10;
     pushMatrix();
     translate(x*(boxSize+dis), y*(boxSize+dis), z*(boxSize+dis));
-    rotateX(rotation[0]);
-    rotateY(rotation[1]);
-    rotateZ(rotation[2]);
+    // rotateX(rotation[0]);
+    // rotateY(rotation[1]);
+    // rotateZ(rotation[2]);
     rotateX(radians(r));
     box(boxSize);
     popMatrix();

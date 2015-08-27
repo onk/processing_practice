@@ -2,6 +2,7 @@ import peasy.*;
 import de.looksgood.ani.*;
 PeasyCam cam;
 SeparateBox[] sboxes;
+int BOX_SIZE = 180;
 
 boolean sketchFullScreen() {
   return true;
@@ -20,7 +21,7 @@ void setup() {
   for(int x = 0; x < 6; x++) {
     for(int y = 0; y < 6; y++) {
       for(int z = 0; z < 6; z++) {
-        sboxes[x + y*6 + z*6*6] = new SeparateBox(x, y, z);
+        sboxes[x + y*6 + z*6*6] = new SeparateBox(BOX_SIZE, x, y, z);
       }
     }
   }
@@ -29,7 +30,7 @@ void setup() {
 void draw() {
   background(0);
   pushMatrix();
-  translate(-300, -300, -300);
+  translate(-BOX_SIZE*3, -BOX_SIZE*3, -BOX_SIZE*3);
   for(SeparateBox sbox : sboxes) {
     sbox.render(cam.getRotations());
   }
@@ -37,12 +38,14 @@ void draw() {
 }
 
 class SeparateBox {
+  int boxSize;
   int x;
   int y;
   int z;
   float r;
   boolean move;
-  SeparateBox(int x, int y, int z) {
+  SeparateBox(int boxSize, int x, int y, int z) {
+    this.boxSize = boxSize;
     this.x = x;
     this.y = y;
     this.z = z;
@@ -52,12 +55,12 @@ class SeparateBox {
   void render(float[] rotation) {
     int dis = 10;
     pushMatrix();
-    translate(x*(100+dis), y*(100+dis), z*(100+dis));
+    translate(x*(boxSize+dis), y*(boxSize+dis), z*(boxSize+dis));
     rotateX(rotation[0]);
     rotateY(rotation[1]);
     rotateZ(rotation[2]);
     rotateX(radians(r));
-    box(100);
+    box(boxSize);
     popMatrix();
   }
 

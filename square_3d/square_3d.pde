@@ -42,6 +42,7 @@ void setup() {
 
 void draw() {
   background(0);
+  // drawAxes();
   pushMatrix();
 
   hint(DISABLE_DEPTH_TEST); // zバッファの無効化
@@ -88,4 +89,19 @@ void keyPressed() {
       }
       break;
   }
+}
+void drawAxes() {
+  beginShape(LINES);
+  stroke(255,0,0);
+  vertex(0,0,0);
+  vertex(1000,0,0);
+
+  stroke(0,255,0);
+  vertex(0,0,0);
+  vertex(0,1000,0);
+
+  stroke(0,0,255);
+  vertex(0,0,0);
+  vertex(0,0,1000);
+  endShape();
 }

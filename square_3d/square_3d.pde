@@ -1,5 +1,5 @@
 void setup() {
-  size(360, 360, P3D);
+  size(displayWidth, displayHeight, P3D);
   fill(63, 127, 255);
   stroke(255);
 }

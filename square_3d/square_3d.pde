@@ -16,6 +16,8 @@ void setup() {
 
 void draw() {
   background(0);
+  pushMatrix();
+  translate(-300, -300, -300);
   int dis = 20;
   for(int x = 0; x < 6; x++) {
     for(int y = 0; y < 6; y++) {
@@ -27,4 +29,5 @@ void draw() {
       }
     }
   }
+  popMatrix();
 }

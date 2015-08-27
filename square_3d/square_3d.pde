@@ -1,9 +1,15 @@
+import peasy.*;
+PeasyCam cam;
+
 boolean sketchFullScreen() {
   return true;
 }
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
+  cam = new PeasyCam(this, width);
+  cam.setMinimumDistance(width / 2);
+  cam.setMaximumDistance(width * 2);
   fill(63, 127, 255);
   stroke(255);
 }

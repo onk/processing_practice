@@ -1,3 +1,7 @@
+boolean sketchFullScreen() {
+  return true;
+}
+
 void setup() {
   size(displayWidth, displayHeight, P3D);
   fill(63, 127, 255);

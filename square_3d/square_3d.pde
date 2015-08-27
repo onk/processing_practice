@@ -50,7 +50,7 @@ class SeparateBox {
     r = 0;
   }
   void render(float[] rotation) {
-    int dis = 20;
+    int dis = 10;
     pushMatrix();
     translate(x*(100+dis), y*(100+dis), z*(100+dis));
     rotateX(rotation[0]);

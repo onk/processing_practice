@@ -28,6 +28,7 @@ void draw() {
   pushMatrix();
   translate(-300, -300, -300);
   for(SeparateBox sbox : sboxes) {
+    sbox.update();
     sbox.render(cam.getRotations());
   }
   popMatrix();
@@ -37,10 +38,14 @@ class SeparateBox {
   int x;
   int y;
   int z;
+  float r;
+  boolean move;
   SeparateBox(int x, int y, int z) {
     this.x = x;
     this.y = y;
     this.z = z;
+    move = random(1) < 0.5;
+    r = 0;
   }
   void render(float[] rotation) {
     int dis = 20;
@@ -49,7 +54,14 @@ class SeparateBox {
     rotateX(rotation[0]);
     rotateY(rotation[1]);
     rotateZ(rotation[2]);
+    rotateX(radians(r));
     box(100);
     popMatrix();
+  }
+
+  void update() {
+    if (move) {
+      r += 5;
+    }
   }
 }

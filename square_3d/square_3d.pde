@@ -7,6 +7,7 @@ private Particle[] particles = new Particle[1000];
 float particleX = 100;
 float particleY = 200;
 int BOX_SIZE = 180;
+int DISTANCE_SIZE = 10;
 
 boolean sketchFullScreen() {
   return true;
@@ -24,7 +25,7 @@ void setup() {
   for(int x = 0; x < 6; x++) {
     for(int y = 0; y < 6; y++) {
       for(int z = 0; z < 6; z++) {
-        sboxes[x + y*6 + z*6*6] = new SeparateBox(BOX_SIZE, x, y, z);
+        sboxes[x + y*6 + z*6*6] = new SeparateBox(x, y, z);
       }
     }
   }
@@ -56,7 +57,7 @@ void draw() {
   hint(ENABLE_DEPTH_TEST);  // zバッファの有効化
   blendMode(BLEND);
 
-  translate(-BOX_SIZE*3, -BOX_SIZE*3, -BOX_SIZE*3);
+  translate(-BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5));
   for(SeparateBox sbox : sboxes) {
     sbox.render(cam.getRotations());
   }

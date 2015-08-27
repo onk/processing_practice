@@ -5,8 +5,7 @@ class SeparateBox {
   int z;
   float r;
   boolean move;
-  SeparateBox(int boxSize, int x, int y, int z) {
-    this.boxSize = boxSize;
+  SeparateBox(int x, int y, int z) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -14,14 +13,13 @@ class SeparateBox {
     r = 0;
   }
   void render(float[] rotation) {
-    int dis = 10;
     pushMatrix();
-    translate(x*(boxSize+dis), y*(boxSize+dis), z*(boxSize+dis));
+    translate(x*(BOX_SIZE+DISTANCE_SIZE), y*(BOX_SIZE+DISTANCE_SIZE), z*(BOX_SIZE+DISTANCE_SIZE));
     // rotateX(rotation[0]);
     // rotateY(rotation[1]);
     // rotateZ(rotation[2]);
     rotateX(radians(r));
-    box(boxSize);
+    box(BOX_SIZE);
     popMatrix();
   }
 

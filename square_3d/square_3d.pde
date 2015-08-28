@@ -15,7 +15,7 @@ boolean sketchFullScreen() {
 
 void setup() {
   size(displayWidth, displayHeight, P3D);
-  cam = new PeasyCam(this, width);
+  cam = new PeasyCam(this, width * 1.2); // あまり box の手前をパーティクルに横切って欲しくないので
   cam.setMinimumDistance(width / 2);
   cam.setMaximumDistance(width * 2);
   Ani.init(this);

@@ -8,6 +8,7 @@ float particleX = 100;
 float particleY = 200;
 int BOX_SIZE = 180;
 int DISTANCE_SIZE = 10;
+PImage img;
 
 boolean sketchFullScreen() {
   return true;
@@ -21,11 +22,12 @@ void setup() {
   Ani.init(this);
   fill(63, 127, 255);
   stroke(255);
+  img = loadImage("tororo.jpg");
   sboxes = new SeparateBox[6*6*6];
   for(int x = 0; x < 6; x++) {
     for(int y = 0; y < 6; y++) {
       for(int z = 0; z < 6; z++) {
-        sboxes[x + y*6 + z*6*6] = new SeparateBox(x, y, z);
+        sboxes[x + y*6 + z*6*6] = new SeparateBox(x, y, z, img);
       }
     }
   }

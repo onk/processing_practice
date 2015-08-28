@@ -2,7 +2,7 @@ import java.util.*;
 import peasy.*;
 import de.looksgood.ani.*;
 PeasyCam cam;
-Slide[] slides;
+Slide[] slides = new Slide[47]; // スライドの枚数に合わせて変更
 private Particle[] particles = new Particle[1000];
 float particleX = 100;
 float particleY = 200;
@@ -23,7 +23,6 @@ void setup() {
   fill(63, 127, 255);
   stroke(255);
 
-  slides = new Slide[47];
   for(int i = 0; i < slides.length; i++) {
     slides[i] = new Slide(loadImage("ab-" + nf(i+1, 2) + ".png"));
   }

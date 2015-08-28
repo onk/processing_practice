@@ -2,13 +2,13 @@ import java.util.*;
 import peasy.*;
 import de.looksgood.ani.*;
 PeasyCam cam;
-SeparateBox[] sboxes;
+Slide[] slides;
 private Particle[] particles = new Particle[1000];
 float particleX = 100;
 float particleY = 200;
 int BOX_SIZE = 180;
 int DISTANCE_SIZE = 10;
-PImage img;
+int currentSlide = 0;
 
 boolean sketchFullScreen() {
   return true;
@@ -22,14 +22,10 @@ void setup() {
   Ani.init(this);
   fill(63, 127, 255);
   stroke(255);
-  img = loadImage("tororo.jpg");
-  sboxes = new SeparateBox[6*6*6];
-  for(int x = 0; x < 6; x++) {
-    for(int y = 0; y < 6; y++) {
-      for(int z = 0; z < 6; z++) {
-        sboxes[x + y*6 + z*6*6] = new SeparateBox(x, y, z, img);
-      }
-    }
+
+  slides = new Slide[13];
+  for(int i = 0; i < slides.length; i++) {
+    slides[i] = new Slide(loadImage(nf(i+1, 2) + ".jpg"));
   }
 
   List<PImage> images = new ArrayList<PImage>();
@@ -61,7 +57,7 @@ void draw() {
   blendMode(BLEND);
 
   translate(-BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5));
-  for(SeparateBox sbox : sboxes) {
+  for(SeparateBox sbox : slides[currentSlide].sboxes) {
     sbox.render(cam.getRotations());
   }
   popMatrix();
@@ -86,9 +82,17 @@ private PImage createLight(Colors colors) {
 void keyPressed() {
   switch(key) {
     case ' ':
-      for(SeparateBox sbox : sboxes) {
+      for(SeparateBox sbox : slides[currentSlide].sboxes) {
         sbox.rotate();
       }
+      break;
+    case 'n':
+      currentSlide++;
+      if (slides.length-1 < currentSlide) { currentSlide = 0; }
+      break;
+    case 'p':
+      currentSlide--;
+      if (currentSlide < 0) { currentSlide = slides.length-1; }
       break;
   }
 }

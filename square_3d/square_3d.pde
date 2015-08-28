@@ -58,6 +58,7 @@ void draw() {
 
   translate(-BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5));
   for(SeparateBox sbox : slides[currentSlide].sboxes) {
+    if (sbox == null) { continue; }
     sbox.render(cam.getRotations());
   }
   popMatrix();
@@ -83,6 +84,7 @@ void keyPressed() {
   switch(key) {
     case ' ':
       for(SeparateBox sbox : slides[currentSlide].sboxes) {
+        if (sbox == null) { continue; }
         sbox.rotate();
       }
       break;

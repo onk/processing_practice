@@ -23,9 +23,9 @@ void setup() {
   fill(63, 127, 255);
   stroke(255);
 
-  slides = new Slide[13];
+  slides = new Slide[47];
   for(int i = 0; i < slides.length; i++) {
-    slides[i] = new Slide(loadImage(nf(i+1, 2) + ".jpg"));
+    slides[i] = new Slide(loadImage("ab-" + nf(i+1, 2) + ".png"));
   }
 
   List<PImage> images = new ArrayList<PImage>();
@@ -87,6 +87,9 @@ void keyPressed() {
         if (sbox == null) { continue; }
         sbox.rotate();
       }
+      break;
+    case 's':
+      saveFrame("output-###.png");
       break;
     case 'n':
       currentSlide++;

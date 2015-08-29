@@ -85,6 +85,7 @@ void keyPressed() {
       for(SeparateBox sbox : slides[currentSlide].sboxes) {
         if (sbox == null) { continue; }
         sbox.rotate();
+        sbox.move = random(1) < 0.5f;
       }
       break;
     case 's':

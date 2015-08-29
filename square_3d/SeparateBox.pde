@@ -7,18 +7,18 @@ class SeparateBox {
   boolean move;
   PImage[] texes = new PImage[6]; // 6面あるので
 
-  SeparateBox(int x, int y, int z, PImage img) {
+  SeparateBox(int x, int y, int z, PImage[] imgs) {
     this.x = x;
     this.y = y;
     this.z = z;
     move = random(1) < 0.5;
     r = 0;
-    texes[0] = img.get( x   *BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[1] = img.get((5-x)*BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[2] = img.get( x   *BOX_SIZE/2, (5-z)*BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[3] = img.get( x   *BOX_SIZE/2,  z   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[4] = img.get((5-z)*BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[5] = img.get( z   *BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[0] = imgs[ x   * 6 +  y   ];
+    texes[1] = imgs[(5-x)* 6 +  y   ];
+    texes[2] = imgs[ x   * 6 + (5-z)];
+    texes[3] = imgs[ x   * 6 +  z   ];
+    texes[4] = imgs[(5-z)* 6 +  y   ];
+    texes[5] = imgs[ z   * 6 +  y   ];
   }
   void render(float[] rotation) {
     pushMatrix();

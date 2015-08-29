@@ -55,7 +55,7 @@ void draw() {
   hint(ENABLE_DEPTH_TEST);  // zバッファの有効化
   blendMode(BLEND);
 
-  translate(-BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5), -BOX_SIZE*2.5-(DISTANCE_SIZE*2.5));
+  translate(-(BOX_SIZE+DISTANCE_SIZE)*2.5, -(BOX_SIZE+DISTANCE_SIZE)*2.5, -(BOX_SIZE+DISTANCE_SIZE)*2.5);
   for(SeparateBox sbox : slides[currentSlide].sboxes) {
     if (sbox == null) { continue; }
     sbox.render(cam.getRotations());

@@ -13,12 +13,12 @@ class SeparateBox {
     this.z = z;
     move = random(1) < 0.5;
     r = 0;
-    texes[0] = img.get( x   *(BOX_SIZE+DISTANCE_SIZE)/2,  y   *(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[1] = img.get((5-x)*(BOX_SIZE+DISTANCE_SIZE)/2,  y   *(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[2] = img.get( x   *(BOX_SIZE+DISTANCE_SIZE)/2, (5-z)*(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[3] = img.get( x   *(BOX_SIZE+DISTANCE_SIZE)/2,  z   *(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[4] = img.get((5-z)*(BOX_SIZE+DISTANCE_SIZE)/2,  y   *(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
-    texes[5] = img.get( z   *(BOX_SIZE+DISTANCE_SIZE)/2,  y   *(BOX_SIZE+DISTANCE_SIZE)/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[0] = img.get( x   *BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[1] = img.get((5-x)*BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[2] = img.get( x   *BOX_SIZE/2, (5-z)*BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[3] = img.get( x   *BOX_SIZE/2,  z   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[4] = img.get((5-z)*BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
+    texes[5] = img.get( z   *BOX_SIZE/2,  y   *BOX_SIZE/2, BOX_SIZE/2, BOX_SIZE/2);
   }
   void render(float[] rotation) {
     pushMatrix();

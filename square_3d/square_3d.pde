@@ -6,7 +6,7 @@ Slide[] slides = new Slide[47]; // スライドの枚数に合わせて変更
 private Particle[] particles = new Particle[1000];
 float particleX = 100;
 float particleY = 200;
-int BOX_SIZE = 180;
+int BOX_SIZE = 100;
 int DISTANCE_SIZE = 10;
 int currentSlide = 0;
 

@@ -12,7 +12,7 @@ class Particle {
     float sinT = sqrt(1 - sq(unitZ));
 
     float unitR = pow(random(1), 1.0/3.0);
-    float r = width;
+    float r = width*1.5;
 
     x = r * unitR * sinT * cos(radP);
     y = r * unitR * sinT * sin(radP);

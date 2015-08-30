@@ -3,7 +3,7 @@ import peasy.*;
 import de.looksgood.ani.*;
 PeasyCam cam;
 Slide[] slides = new Slide[47]; // スライドの枚数に合わせて変更
-private Particle[] particles = new Particle[1000];
+private Particle[] particles = new Particle[1200];
 float particleX = 100;
 float particleY = 200;
 int BOX_SIZE = 100;
@@ -17,7 +17,7 @@ boolean sketchFullScreen() {
 void setup() {
   size(displayWidth, displayHeight, P3D);
   cam = new PeasyCam(this, width * 1.2); // あまり box の手前をパーティクルに横切って欲しくないので
-  cam.setMinimumDistance(width / 2);
+  cam.setMinimumDistance(width / 4);
   cam.setMaximumDistance(width * 2);
   Ani.init(this);
   fill(63, 127, 255);

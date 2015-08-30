@@ -7,7 +7,7 @@ private Particle[] particles = new Particle[1200];
 float particleX = 100;
 float particleY = 200;
 int BOX_SIZE = 100;
-int DISTANCE_SIZE = 10;
+int DISTANCE_SIZE = 0;
 int currentSlide = 0;
 
 boolean sketchFullScreen() {

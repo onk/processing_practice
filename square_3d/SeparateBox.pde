@@ -3,7 +3,9 @@ class SeparateBox {
   int x;
   int y;
   int z;
-  float r;
+  float rx;
+  float ry;
+  float rz;
   boolean move;
   PImage[] texes = new PImage[6]; // 6面あるので
 
@@ -12,7 +14,9 @@ class SeparateBox {
     this.y = y;
     this.z = z;
     move = random(1) < 0.5;
-    r = 0;
+    rx = 0;
+    ry = 0;
+    rz = 0;
     texes[0] = imgs[ x   * 6 +  y   ];
     texes[1] = imgs[(5-x)* 6 +  y   ];
     texes[2] = imgs[ x   * 6 + (5-z)];
@@ -26,15 +30,31 @@ class SeparateBox {
     // rotateX(rotation[0]);
     // rotateY(rotation[1]);
     // rotateZ(rotation[2]);
-    rotateX(radians(r));
+    rotateX(radians(rx));
+    rotateY(radians(ry));
+    rotateZ(radians(rz));
     texturedCube(texes, BOX_SIZE / 2);
     popMatrix();
   }
 
-  void rotate() {
+  void rotate(int c) {
+    rx = 0;
+    ry = 0;
+    rz = 0;
     if (move) {
-      r = 0;
-      Ani ani = new Ani(this, 3.0, "r", 720);
+      String target = "rx";
+      switch(c) {
+        case 0:
+          target = "rx";
+          break;
+        case 1:
+          target = "ry";
+          break;
+        case 2:
+          target = "rz";
+          break;
+      }
+      Ani ani = new Ani(this, 3.0, target, 720);
     }
   }
 

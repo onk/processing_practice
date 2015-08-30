@@ -82,10 +82,11 @@ private PImage createLight(Colors colors) {
 void keyPressed() {
   switch(key) {
     case ' ':
+      int target = (int)random(3);
       for(SeparateBox sbox : slides[currentSlide].sboxes) {
         if (sbox == null) { continue; }
-        sbox.rotate();
-        sbox.move = random(1) < 0.5f;
+        sbox.rotate(target);
+        sbox.move = random(1) < 0.7f;
       }
       break;
     case 's':

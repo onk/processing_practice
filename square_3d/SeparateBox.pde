@@ -13,7 +13,7 @@ class SeparateBox {
     this.x = x;
     this.y = y;
     this.z = z;
-    move = random(1) < 0.5;
+    move = random(1) < 0.7;
     rx = 0;
     ry = 0;
     rz = 0;

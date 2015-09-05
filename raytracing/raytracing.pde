@@ -8,9 +8,8 @@ void setup() {
 void draw() {
   // 視点を決める
   PVector viewPoint = new PVector(0, 0, -5);
-  // 球を設置する(中心点と半径)
-  PVector rCenter = new PVector(0, 0, -5);
-  float r = 1.0;
+  // 球を設置する
+  Sphere sphere = new Sphere(new PVector(0, 0, 5), 1.0f);
   // 画面を (-1, 1, 0)〜(1, -1, 0) の原点を中心とした 2x2 の平面として描画する
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
@@ -24,5 +23,15 @@ void draw() {
       }
       point(x, y);
     }
+  }
+}
+
+class Sphere {
+  PVector c;
+  float r;
+
+  Sphere(PVector c, float r) {
+    this.c = c;
+    this.r = r;
   }
 }

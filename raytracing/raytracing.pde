@@ -35,3 +35,13 @@ class Sphere {
     this.r = r;
   }
 }
+
+class Line {
+  PVector s;
+  PVector v;
+
+  Line(PVector s, PVector v) {
+    this.s = s;
+    this.v = v;
+  }
+}

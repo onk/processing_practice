@@ -39,8 +39,29 @@ class Sphere {
   }
 
   boolean isIntersect(Line l) {
-    // TODO: 未実装
-    return false;
+    // 線の方程式は X = l.s + t * l.v
+    // 球の方程式は (X-c)^2 = r^2
+    // 連立させて
+    // (s + t*v - c)^2 = r^2
+    // ベクトルの加算減算は順不同なので
+    // ((s-c) + t*v)^2 = r^2
+    // t について整理すると
+    // (|v|^2 * t^2) + (2*v*(x-c)*t) + (|s-c|^2 - r^2) = 0
+    // これを A*t^2 + B*t + C = 0 の一時変数にする
+    // A = |v|^2
+    // B = 2*v*(x-c)
+    // C = |s-c|^2 - r*r
+    // ここで判別式D (B^2 - 4AC) の値が
+    // D < 0 ... 解が虚数
+    // D = 0 ... 球に接する
+    // D > 0 ... 球と交点を2つ持つ
+    // よって交差するかどうかは D >= 0 を確かめれば良い。
+    PVector s_c = PVector.sub(l.s, c);
+    float a = sq(l.v.mag());
+    float b = 2 * PVector.dot(l.v, s_c);
+    float c = sq(s_c.mag()) - sq(r);
+    float d = sq(b) - 4 * a * c;
+    return d >= 0;
   }
 }
 

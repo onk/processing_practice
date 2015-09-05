@@ -14,9 +14,9 @@ void draw() {
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       // 視点と 点 (x, y) に向かう半直線と球との交差判定を行う
-      boolean isCollision = false; // TODO: 未実装
+      boolean isIntersect = false; // TODO: 未実装
 
-      if (isCollision) {
+      if (isIntersect) {
         stroke(255, 0, 0);
       } else {
         stroke(0, 0, 255);

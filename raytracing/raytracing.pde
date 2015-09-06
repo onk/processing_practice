@@ -19,7 +19,8 @@ void draw() {
       // 視点と 点(x, y) の半直線
       Line line = new Line(viewPoint, PVector.sub(new PVector(xw, yw, 0), viewPoint));
       // 交差判定
-      if (sphere.isIntersect(line)) {
+      PVector intersection = sphere.intersection(line);
+      if (intersection != null) {
         stroke(255, 0, 0);
       } else {
         stroke(0, 0, 255);
@@ -38,7 +39,7 @@ class Sphere {
     this.r = r;
   }
 
-  boolean isIntersect(Line l) {
+  PVector intersection(Line l) {
     // 線の方程式は X = l.s + t * l.v
     // 球の方程式は (X-c)^2 = r^2
     // 連立させて
@@ -63,7 +64,18 @@ class Sphere {
     float b = PVector.dot(l.v, s_c);
     float c = sq(s_c.mag()) - sq(r);
     float d = sq(b) - a * c;
-    return d >= 0;
+    // 交差しない
+    if (d < 0) { return null; }
+
+    float sqrtd = sqrt(d);
+    float t1 = (-b - sqrtd) / a;
+    float t2 = (-b + sqrtd) / a;
+    // 視点より先で先にぶつかる方を交点とする
+    float tmax = max(t1, t2);
+    float tmin = min(t1, t2);
+    if (tmax < 0) { return null; } // 視点より手前
+    float t = (0 < tmin) ? tmin : tmax;
+    return PVector.add(l.s, PVector.mult(l.v, t));
   }
 }
 

@@ -32,7 +32,7 @@ void draw() {
         float c = map(constrain(n.dot(l), 0, 1), 0, 1, 0, 255);
         stroke(c);
       } else {
-        stroke(0, 0, 255);
+        stroke(100,149,237);
       }
       point(x, y);
     }

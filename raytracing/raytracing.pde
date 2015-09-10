@@ -10,6 +10,9 @@ void draw() {
   PVector viewPoint = new PVector(0, 0, -5);
   // 球を設置する
   Sphere sphere = new Sphere(new PVector(0, 0, 5), 1.0f);
+  // 光源を設置する
+  PVector lightPoint = new PVector(-5, 5, -5);
+
   // 画面を (-1, 1, 0)〜(1, -1, 0) の原点を中心とした 2x2 の平面として描画する
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
@@ -21,7 +24,13 @@ void draw() {
       // 交差判定
       PVector intersection = sphere.intersection(line);
       if (intersection != null) {
-        stroke(255, 0, 0);
+        // 交点での拡散反射光の強さは法線ベクトルと入射ベクトルの内積
+        PVector n = sphere.normalVector(intersection);
+        PVector l = PVector.sub(intersection, lightPoint);
+        l.normalize();
+        // 内積 (-1..1) を 0..1 に切り詰めて 0..255 にマッピング
+        float c = map(constrain(n.dot(l), 0, 1), 0, 1, 0, 255);
+        stroke(c);
       } else {
         stroke(0, 0, 255);
       }
@@ -76,6 +85,13 @@ class Sphere {
     if (tmax < 0) { return null; } // 視点より手前
     float t = (0 < tmin) ? tmin : tmax;
     return PVector.add(l.s, PVector.mult(l.v, t));
+  }
+
+  // 法線ベクトル
+  PVector normalVector(PVector i) {
+    PVector n = PVector.sub(c, i);
+    n.normalize();
+    return n;
   }
 }
 

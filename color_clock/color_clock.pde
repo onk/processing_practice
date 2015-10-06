@@ -9,10 +9,10 @@ float mx;
 float my;
 
 void setup() {
-  size(600, 360);
+  size(displayWidth, displayHeight);
   noStroke();
-  textFont(createFont("Tahoma-Bold", 64));
-  textSize(64);
+  textFont(createFont("Tahoma-Bold", 128));
+  textSize(128);
   textAlign(CENTER, CENTER);
   frameRate(FRAME_RATE);
   Ani.init(this);
@@ -37,6 +37,14 @@ void draw() {
   }
 
   displayColor();
+}
+
+void mousePressed() {
+  exit();
+}
+
+void keyPressed() {
+  exit();
 }
 
 // 1. 白地に青文字で描画
